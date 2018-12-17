@@ -4,7 +4,8 @@ const {
   hasOption,
   getOption,
   isLengthTwo,
-  hasOnlyOption
+  hasOnlyOption,
+  getLineCount
 } = require("../src/inputHandler/handleInput.js");
 
 describe("parseInput", function() {
@@ -170,5 +171,19 @@ describe("hasOnlyOption", function() {
 
   it('should return true when we give "-c"', function() {
     assert.deepEqual(hasOnlyOption("-c"), true);
+  });
+});
+
+describe("getLineCount", function() {
+  it("should return 0 when we give an empty string as first parameter", function() {
+    assert.deepEqual(getLineCount([""]), 0);
+  });
+
+  it("should return the second parameter when we give only option in first parameter", function() {
+    assert.deepEqual(getLineCount(["-n", "1"]), 1);
+  });
+
+  it('should return 1 when we give the first parameter as "-n1"', function() {
+    assert.deepEqual(getLineCount(["-n1"]), 1);
   });
 });

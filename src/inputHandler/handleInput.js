@@ -59,5 +59,6 @@ module.exports = {
   hasOption,
   getOption,
   isLengthTwo,
-  hasOnlyOption
+  hasOnlyOption,
+  getLineCount
 };
