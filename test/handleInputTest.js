@@ -3,7 +3,8 @@ const {
   parseInput,
   hasOption,
   getOption,
-  isLengthTwo
+  isLengthTwo,
+  hasOnlyOption
 } = require("../src/inputHandler/handleInput.js");
 
 describe("parseInput", function() {
@@ -151,5 +152,23 @@ describe("isLengthTwo", function() {
 
   it("should return true when given a string of length", function() {
     assert.deepEqual(isLengthTwo("ab"), true);
+  });
+});
+
+describe("hasOnlyOption", function() {
+  it("should return false when we give empty string", function() {
+    assert.deepEqual(hasOnlyOption(""), false);
+  });
+
+  it("should return false when we give string with numbers", function() {
+    assert.deepEqual(hasOnlyOption("-n5"), false);
+  });
+
+  it("should return true when we give '-n'", function() {
+    assert.deepEqual(hasOnlyOption("-n"), true);
+  });
+
+  it('should return true when we give "-c"', function() {
+    assert.deepEqual(hasOnlyOption("-c"), true);
   });
 });

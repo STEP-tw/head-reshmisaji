@@ -54,4 +54,10 @@ const parseInput = function(userInputs) {
   return parsedInput;
 };
 
-module.exports = { parseInput, hasOption, getOption, isLengthTwo };
+module.exports = {
+  parseInput,
+  hasOption,
+  getOption,
+  isLengthTwo,
+  hasOnlyOption
+};
