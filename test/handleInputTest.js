@@ -2,10 +2,11 @@ const assert = require("assert");
 const {
   parseInput,
   hasOption,
-  getOption
+  getOption,
+  isLengthTwo
 } = require("../src/inputHandler/handleInput.js");
 
-describe("parseInput()", function() {
+describe("parseInput", function() {
   describe("With no options", function() {
     it('should return an object { option: "n", count: "10", fileNames: ["fileName"] } when we give only one file name', function() {
       let userInput = ["sample.txt"];
@@ -95,7 +96,7 @@ describe("parseInput()", function() {
   });
 });
 
-describe("hasOption()", function() {
+describe("hasOption", function() {
   it("should return false when given an empty string", function() {
     assert.deepEqual(hasOption([""]), false);
   });
@@ -117,7 +118,7 @@ describe("hasOption()", function() {
   });
 });
 
-describe("getOption()", function() {
+describe("getOption", function() {
   it('should return "n" when we give "-1"', function() {
     assert.deepEqual(getOption("-1"), "n");
   });
@@ -125,10 +126,30 @@ describe("getOption()", function() {
   it('should return "n" when we give "-n"', function() {
     assert.deepEqual(getOption("-n"), "n");
   });
+
   it('should return "c" when we give "-c"', function() {
     assert.deepEqual(getOption("-c"), "c");
   });
+
   it('should return "v" when we give "-v"', function() {
     assert.deepEqual(getOption("-v"), "v");
+  });
+});
+
+describe("isLengthTwo", function() {
+  it("should return false when we give an empty string", function() {
+    assert.deepEqual(isLengthTwo(""), false);
+  });
+
+  it("should return false when we give a string of length 1", function() {
+    assert.deepEqual(isLengthTwo("a"), false);
+  });
+
+  it("should return false when we give string of length greater than 2", function() {
+    assert.deepEqual(isLengthTwo("abc"), false);
+  });
+
+  it("should return true when given a string of length", function() {
+    assert.deepEqual(isLengthTwo("ab"), true);
   });
 });
