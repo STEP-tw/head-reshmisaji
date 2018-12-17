@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { parseInput } = require("../src/inputHandler/handleInput.js");
+const { parseInput, hasOption } = require("../src/inputHandler/handleInput.js");
 
 describe("parseInput", function() {
   describe("With no options", function() {
@@ -91,5 +91,24 @@ describe("parseInput", function() {
   });
 });
 
+describe("hasOption", function() {
+  it("should return false when given an empty string", function() {
+    assert.deepEqual(hasOption([""]), false);
+  });
 
+  it("should return false when given a string with only space", function() {
+    assert.deepEqual(hasOption([" "]), false);
+  });
 
+  it("should return false when given a string with '-' and has a length less than 1", function() {
+    assert.deepEqual(hasOption(["-"]), false);
+  });
+
+  it("should return false when given a string starts with space and has a length greater than 1", function() {
+    assert.deepEqual(hasOption([" 1"]), false);
+  });
+
+  it('should return true when given a string starts with "-" and has a length greater than 1', function() {
+    assert.deepEqual(hasOption(["-1"]), true);
+  });
+});

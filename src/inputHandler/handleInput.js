@@ -1,7 +1,7 @@
 const {} = require("../util/utils.js");
 
 const hasOption = function(userInputs) {
-  return userInputs[0].slice(0, 1) == "-";
+  return userInputs[0].length > 1 && userInputs[0].slice(0, 1) == "-";
 };
 
 const getOption = function(userOption) {
@@ -54,4 +54,4 @@ const parseInput = function(userInputs) {
   return parsedInput;
 };
 
-module.exports = { parseInput };
+module.exports = { parseInput, hasOption };
