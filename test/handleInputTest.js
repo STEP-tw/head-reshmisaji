@@ -1,7 +1,11 @@
 const assert = require("assert");
-const { parseInput, hasOption } = require("../src/inputHandler/handleInput.js");
+const {
+  parseInput,
+  hasOption,
+  getOption
+} = require("../src/inputHandler/handleInput.js");
 
-describe("parseInput", function() {
+describe("parseInput()", function() {
   describe("With no options", function() {
     it('should return an object { option: "n", count: "10", fileNames: ["fileName"] } when we give only one file name', function() {
       let userInput = ["sample.txt"];
@@ -91,7 +95,7 @@ describe("parseInput", function() {
   });
 });
 
-describe("hasOption", function() {
+describe("hasOption()", function() {
   it("should return false when given an empty string", function() {
     assert.deepEqual(hasOption([""]), false);
   });
@@ -110,5 +114,21 @@ describe("hasOption", function() {
 
   it('should return true when given a string starts with "-" and has a length greater than 1', function() {
     assert.deepEqual(hasOption(["-1"]), true);
+  });
+});
+
+describe("getOption()", function() {
+  it('should return "n" when we give "-1"', function() {
+    assert.deepEqual(getOption("-1"), "n");
+  });
+
+  it('should return "n" when we give "-n"', function() {
+    assert.deepEqual(getOption("-n"), "n");
+  });
+  it('should return "c" when we give "-c"', function() {
+    assert.deepEqual(getOption("-c"), "c");
+  });
+  it('should return "v" when we give "-v"', function() {
+    assert.deepEqual(getOption("-v"), "v");
   });
 });
