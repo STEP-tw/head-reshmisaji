@@ -5,7 +5,8 @@ const {
   getOption,
   isLengthTwo,
   hasOnlyOption,
-  getLineCount
+  getLineCount,
+  getFileNames
 } = require("../src/inputHandler/handleInput.js");
 
 describe("parseInput", function() {
@@ -189,5 +190,39 @@ describe("getLineCount", function() {
 
   it('should return 1 when given "-1" as first parameter', function() {
     assert.deepEqual(getLineCount(["-1", "sample.txt"]), 1);
+  });
+});
+
+describe("getFileNames", function() {
+  it("should return array with empty string when given an empty string as the file name", function() {
+    let userInput = ["-1", ""];
+    let expectedOutput = [""];
+    let actualOutput = getFileNames(userInput);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return an array of empty strings when given all filenames as empty strings", function() {
+    let userInput = ["-1", "", ""];
+    let expectedOutput = ["", ""];
+    let actualOutput = getFileNames(userInput);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return array with only one element when given only one file name", function() {
+    let userInput = ["-1", "sample.js"];
+    let expectedOutput = ["sample.js"];
+    let actualOutput = getFileNames(userInput);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return an array with more than one element when given more than one file name", function() {
+    let userInput = ["-1", "sample.js", "example.js"];
+    let expectedOutput = ["sample.js", "example.js"];
+    let actualOutput = getFileNames(userInput);
+
+    assert.deepEqual(actualOutput, expectedOutput);
   });
 });

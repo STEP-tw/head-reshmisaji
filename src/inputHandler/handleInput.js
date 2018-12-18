@@ -60,5 +60,6 @@ module.exports = {
   getOption,
   isLengthTwo,
   hasOnlyOption,
-  getLineCount
+  getLineCount,
+  getFileNames
 };
