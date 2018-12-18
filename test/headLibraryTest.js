@@ -1,7 +1,8 @@
 const assert = require("assert");
 const {
   getHeading,
-  getErrorMessage
+  getErrorMessage,
+  addHeading
 } = require("../src/library/headLibrary.js");
 
 describe("getHeading", function() {
@@ -16,5 +17,27 @@ describe("getErrorMessage", function() {
       getErrorMessage("sample.js"),
       "head: sample.js: No such file or directory"
     );
+  });
+});
+
+describe("addHeading", function() {
+  it("should return the file contents as it is when there is only one file", function() {
+    let fileNames = ["sample.js"];
+    let fileContents = "ab\ncd";
+    let heading = "\n==> sample.js <==\n";
+    let expectedOutput = "ab\ncd";
+    let actualOutput = addHeading(fileNames, fileContents, heading);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return the contents with the heading when there is more than one file", function() {
+    let fileNames = ["sample.js", "example.js"];
+    let fileContents = "ab\ncd";
+    heading = "\n==> sample.js <==\n";
+    let expectedOutput = heading + "ab\ncd";
+    let actualOutput = addHeading(fileNames, fileContents, heading);
+
+    assert.deepEqual(actualOutput, expectedOutput);
   });
 });

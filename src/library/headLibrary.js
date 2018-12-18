@@ -6,25 +6,31 @@ const getErrorMessage = function(file) {
   return "head: " + file + ": No such file or directory";
 };
 
+const addHeading = function(fileNames, fileContents, heading) {
+  if (fileNames.length > 1) {
+    fileContents = heading + fileContents;
+  }
+  return fileContents;
+};
+
+const getContents = function(file, userInputs, filterOptions, fs) {
+  let heading = getHeading(file);
+  let contents = fs.readFileSync(file, "utf8");
+  let fileContents = filterOptions[userInputs.option](
+    contents,
+    userInputs.count
+  );
+  return addHeading(userInputs.fileNames, fileContents, heading);
+};
+
 const head = function(userInputs, filterOptions, fs) {
   return userInputs.fileNames.map(function(file) {
     if (fs.existsSync(file)) {
-      let heading = getHeading(file);
-      let fileContents;
-      let contents = fs.readFileSync(file, "utf8");
-
-      fileContents = filterOptions[userInputs.option](
-        contents,
-        userInputs.count
-      );
-      if (userInputs.fileNames.length > 1) {
-        fileContents = heading + fileContents;
-      }
-      return fileContents;
+      return getContents(file, userInputs, filterOptions, fs);
     } else {
       return getErrorMessage(file);
     }
   });
 };
 
-module.exports = { head, getHeading, getErrorMessage };
+module.exports = { head, getHeading, getErrorMessage, addHeading };
