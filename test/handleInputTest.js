@@ -180,10 +180,14 @@ describe("getLineCount", function() {
   });
 
   it("should return the second parameter when we give only option in first parameter", function() {
-    assert.deepEqual(getLineCount(["-n", "1"]), 1);
+    assert.deepEqual(getLineCount(["-n", "1", "sample.txt"]), 1);
   });
 
   it('should return 1 when we give the first parameter as "-n1"', function() {
-    assert.deepEqual(getLineCount(["-n1"]), 1);
+    assert.deepEqual(getLineCount(["-n1", "sample.txt"]), 1);
+  });
+
+  it('should return 1 when given "-1" as first parameter', function() {
+    assert.deepEqual(getLineCount(["-1", "sample.txt"]), 1);
   });
 });
