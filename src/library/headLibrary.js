@@ -1,7 +1,11 @@
+const getHeading = function(file) {
+  return "\n==> " + file + " <==\n";
+};
+
 const head = function(userInputs, filterOptions, fs) {
   return userInputs.fileNames.map(function(file) {
     if (fs.existsSync(file)) {
-      let heading = "\n==>" + file + "<==\n";
+      let heading = getHeading(file);
       let fileContents;
       let contents = fs.readFileSync(file, "utf8");
 
@@ -19,4 +23,4 @@ const head = function(userInputs, filterOptions, fs) {
   });
 };
 
-module.exports = { head };
+module.exports = { head, getHeading };
