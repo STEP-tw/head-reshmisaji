@@ -5,7 +5,7 @@ const getTopLines = function(contents, numberOfLines) {
 
 const getFirstCharacters = function(contents, numberOfCharacters) {
   let data = contents.split("");
-  return data.slice(0, numberOfCharacters);
+  return data.slice(0, numberOfCharacters).join("");
 };
 
 module.exports = { getTopLines, getFirstCharacters };
