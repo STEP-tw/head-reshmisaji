@@ -1,3 +1,4 @@
+const { getTopLines, getFirstCharacters } = require("../util/utils.js");
 const getHeading = function(file) {
   return "\n==> " + file + " <==\n";
 };
@@ -13,7 +14,8 @@ const addHeading = function(fileNames, fileContents, heading) {
   return fileContents;
 };
 
-const getContents = function(file, userInputs, filterOptions, fs) {
+const getContents = function(file, userInputs, fs) {
+  let filterOptions = { c: getFirstCharacters, n: getTopLines };
   let heading = getHeading(file);
   let contents = fs.readFileSync(file, "utf8");
   let fileContents = filterOptions[userInputs.option](
@@ -23,14 +25,14 @@ const getContents = function(file, userInputs, filterOptions, fs) {
   return addHeading(userInputs.fileNames, fileContents, heading);
 };
 
-const head = function(userInputs, filterOptions, fs) {
+const head = function(userInputs, fs) {
   return userInputs.fileNames.map(function(file) {
     if (fs.existsSync(file)) {
-      return getContents(file, userInputs, filterOptions, fs);
+      return getContents(file, userInputs, fs);
     } else {
       return getErrorMessage(file);
     }
   });
 };
 
-module.exports = { head, getHeading, getErrorMessage, addHeading };
+module.exports = { head, getHeading, getErrorMessage, addHeading, getContents };
