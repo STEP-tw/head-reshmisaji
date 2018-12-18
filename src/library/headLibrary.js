@@ -2,6 +2,10 @@ const getHeading = function(file) {
   return "\n==> " + file + " <==\n";
 };
 
+const getErrorMessage = function(file) {
+  return "head: " + file + ": No such file or directory";
+};
+
 const head = function(userInputs, filterOptions, fs) {
   return userInputs.fileNames.map(function(file) {
     if (fs.existsSync(file)) {
@@ -18,9 +22,9 @@ const head = function(userInputs, filterOptions, fs) {
       }
       return fileContents;
     } else {
-      return "head: " + file + ": No such file or directory";
+      return getErrorMessage(file);
     }
   });
 };
 
-module.exports = { head, getHeading };
+module.exports = { head, getHeading, getErrorMessage };
