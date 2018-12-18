@@ -1,18 +1,23 @@
-/* 
-  Usage:
-  node ./head.js file1
-  node ./head.js -n5 file1
-  node ./head.js -n 5 file1
-  node ./head.js -5 file1
-  node ./head.js file1 file2
-  node ./head.js -n 5 file1 file2
-  node ./head.js -n5 file1 file2
-  node ./head.js -5 file1 file2 
-  node ./head.js -c5 file1
-  node ./head.js -c 5 file1
-  node ./head.js -c5 file1 file2
-  node ./head.js -c 5 file1 file2
-*/
+const { parseInput } = require("./src/inputHandler/handleInput.js");
+const { getTopLines, getFirstCharacters } = require("./src/util/utils.js");
+const { readFileSync } = require("fs");
 
+const main = function(args) {
+  let userInputs = parseInput(args.slice(2));
+  let filterOptions = { c: getFirstCharacters, n: getTopLines };
+  let result;
 
+  result = userInputs.fileNames.map(function(file) {
+    let heading = "==>" + file + "<==";
+    let fileContents;
+    let contents = readFileSync(file, "utf8");
 
+    fileContents = filterOptions[userInputs.option](contents, userInputs.count);
+    if (userInputs.fileNames.length > 1) {
+      fileContents = heading + fileContents;
+    }
+    return fileContents;
+  });
+  result.map(x => console.log(x));
+};
+main(process.argv);
