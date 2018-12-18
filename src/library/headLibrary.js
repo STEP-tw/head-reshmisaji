@@ -1,6 +1,6 @@
 const { getTopLines, getFirstCharacters } = require("../util/utils.js");
 const getHeading = function(file) {
-  return "\n==> " + file + " <==\n";
+  return "==> " + file + " <==\n";
 };
 
 const getErrorMessage = function(file) {
