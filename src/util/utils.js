@@ -3,4 +3,8 @@ const getTopLines = function(contents, numberOfLines) {
   return data.slice(0, numberOfLines);
 };
 
-module.exports = { getTopLines };
+const getFirstCharacters = function(contents, numberOfCharacters) {
+  let data = contents.split("");
+  return data.slice(0, numberOfCharacters);
+};
+module.exports = { getTopLines, getFirstCharacters };
