@@ -1,5 +1,3 @@
-const {} = require("../util/utils.js");
-
 const hasOption = function(userInputs) {
   return userInputs[0].length > 1 && userInputs[0].slice(0, 1) == "-";
 };
