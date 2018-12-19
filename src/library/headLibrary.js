@@ -63,7 +63,7 @@ const classifyInput = function(userInputs) {
   if (!isValidCount(userInputs.count)) {
     return "illegalCount";
   }
-  return validInput;
+  return "validInput";
 };
 const head = function(userInputs, fs) {
   let returnValue = {
@@ -80,5 +80,10 @@ module.exports = {
   getErrorMessage,
   addHeading,
   getContents,
-  fileHandler
+  fileHandler,
+  isValidCount,
+  isValidOption,
+  getUsage,
+  getIllegalCountError,
+  classifyInput
 };

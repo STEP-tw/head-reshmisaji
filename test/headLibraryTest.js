@@ -5,7 +5,12 @@ const {
   addHeading,
   getContents,
   head,
-  fileHandler
+  fileHandler,
+  getUsage,
+  getIllegalCountError,
+  isValidCount,
+  isValidOption,
+  classifyInput
 } = require("../src/library/headLibrary.js");
 
 const fsTrue = {
@@ -110,6 +115,94 @@ describe("fileHandler", function() {
     let userInputs = { option: "c", count: "3", fileNames: [sample] };
     let expectedOutput = ["ab\n"];
     let actualOutput = fileHandler(userInputs, fsTrue);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
+
+describe("getUsage", function() {
+  it("should return the invalid option error and usage of head", function() {
+    let userInputs = { option: "v", count: "3", fileNames: ["sample.txt"] };
+    let expectedOutput = [
+      "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
+    ];
+    let actualOutput = getUsage(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
+
+describe("getIllegalCountError", function() {
+  it("should return return the error message with the count", function() {
+    let userInputs = { option: "n", count: "0", fileNames: ["sample.js"] };
+    let expectedOutput = ["head: illegal line count -- 0"];
+    let actualOutput = getIllegalCountError(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
+
+describe("isValidCount", function() {
+  it('should return false when given given "-" ', function() {
+    assert.deepEqual(isValidCount("-"), false);
+  });
+
+  it("should return false when given 0", function() {
+    assert.deepEqual(isValidCount(0), false);
+  });
+
+  it("should return true when given 3", function() {
+    assert.deepEqual(isValidCount(3), true);
+  });
+});
+
+describe("isValidOption", function() {
+  it("should return false when given 'r'", function() {
+    assert.deepEqual(isValidOption("r"), false);
+  });
+
+  it('should return false when given "-"', function() {
+    assert.deepEqual(isValidOption("-"), false);
+  });
+
+  it('should return true when given "c"', function() {
+    assert.deepEqual(isValidOption("c"), true);
+  });
+
+  it('should return true when given "n"', function() {
+    assert.deepEqual(isValidOption("n"), true);
+  });
+});
+
+describe("classifyInput", function() {
+  it("should return 'illegalOption' when given '-' as option", function() {
+    let userInputs = { option: "-", count: "3", fileNames: ["sample.txt"] };
+    let expectedOutput = "illegalOption";
+    let actualOutput = classifyInput(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return "illegalOption" when given "v" as option', function() {
+    let userInputs = { option: "v", count: "3", fileNames: ["sample.js"] };
+    let expectedOutput = "illegalOption";
+    let actualOutput = classifyInput(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return "illegalCount" when given given "0" as count ', function() {
+    let userInputs = { option: "n", count: "0", fileNames: ["sample.js"] };
+    let expectedOutput = "illegalCount";
+    let actualOutput = classifyInput(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return "validInput" when given count:"3" and option:"n"', function() {
+    let userInputs = { option: "n", count: "3", fileNames: ["sample.js"] };
+    let expectedOutput = "validInput";
+    let actualOutput = classifyInput(userInputs);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
