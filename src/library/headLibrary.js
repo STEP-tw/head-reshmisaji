@@ -27,13 +27,13 @@ const getContents = function(file, userInputs, fs) {
 
 const fileHandler = function(userInputs, fs) {
   return userInputs.fileNames.map(function(file) {
-    if (fs.existsSync(file)) {
-      return getContents(file, userInputs, fs);
-    } else {
-      return getErrorMessage(file);
-    }
+    let result = { true: getContents, false: getErrorMessage };
+    let fileStatus = fs.existsSync(file);
+
+    return result[fileStatus](file, userInputs, fs);
   });
 };
+
 const head = function(userInputs, fs) {
   return fileHandler(userInputs, fs);
 };
