@@ -65,6 +65,7 @@ const classifyInput = function(userInputs) {
   }
   return "validInput";
 };
+
 const head = function(userInputs, fs) {
   let returnValue = {
     validInput: fileHandler,

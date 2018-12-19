@@ -207,3 +207,42 @@ describe("classifyInput", function() {
     assert.deepEqual(actualOutput, expectedOutput);
   });
 });
+
+describe("head", function() {
+  it("should return an error message when given a non existing fileName", function() {
+    let userInputs = { option: "n", count: "2", fileNames: ["sample.js"] };
+    let expectedOutput = ["head: sample.js: No such file or directory"];
+    let actualOutput = head(userInputs, fsFalse);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return an error message when given option as 'v' ", function() {
+    let sample = "ab\nac\ndd\nfg";
+    let userInputs = { option: "v", count: "2", fileNames: ["sample"] };
+    let expectedOutput = [
+      "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
+    ];
+    let actualOutput = head(userInputs, fsTrue);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return an error message when given count as "0"', function() {
+    let sample = "a\nac\ngg\nvr";
+    let userInputs = { option: "n", count: "0", fileNames: ["sample"] };
+    let expectedOutput = ["head: illegal line count -- 0"];
+    let actualOutput = head(userInputs, fsTrue);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it('should return the first 3 lines of the file when option:"n" and count:"3"', function() {
+    let sample = "a\nac\ngg\nvr";
+    let userInputs = { option: "n", count: "3", fileNames: [sample] };
+    let expectedOutput = ["a\nac\ngg"];
+    let actualOutput = head(userInputs, fsTrue);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
