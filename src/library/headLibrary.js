@@ -43,10 +43,14 @@ const isValidCount = function(count) {
 };
 
 const getUsage = function(userInputs) {
-  let message = "head: illegal option -- ";
+  let usage = {
+    head: "usage: head [-n lines | -c bytes] [file ...]",
+    tail: "usage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
+  };
+  let message = userInputs.filter + ": illegal option -- ";
   message += userInputs.option + "\n";
-  message += "usage: head [-n lines | -c bytes] [file ...]";
 
+  message += usage[userInputs.filter];
   return [message];
 };
 

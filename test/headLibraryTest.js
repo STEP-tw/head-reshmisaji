@@ -147,10 +147,25 @@ describe("getUsage", function() {
       option: "v",
       count: "3",
       fileNames: ["sample.txt"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = [
       "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
+    ];
+    let actualOutput = getUsage(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return the invalid option error and usage of head", function() {
+    let userInputs = {
+      option: "v",
+      count: "3",
+      fileNames: ["sample.txt"],
+      filter: "tail"
+    };
+    let expectedOutput = [
+      "tail: illegal option -- v\nusage: tail [-F | -f | -r] [-q] [-b # | -c # | -n #] [file ...]"
     ];
     let actualOutput = getUsage(userInputs);
 
