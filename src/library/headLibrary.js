@@ -25,7 +25,7 @@ const getContents = function(file, userInputs, fs) {
   return addHeading(userInputs.fileNames, fileContents, heading);
 };
 
-const head = function(userInputs, fs) {
+const fileHandler = function(userInputs, fs) {
   return userInputs.fileNames.map(function(file) {
     if (fs.existsSync(file)) {
       return getContents(file, userInputs, fs);
@@ -34,5 +34,15 @@ const head = function(userInputs, fs) {
     }
   });
 };
+const head = function(userInputs, fs) {
+  return fileHandler(userInputs, fs);
+};
 
-module.exports = { head, getHeading, getErrorMessage, addHeading, getContents };
+module.exports = {
+  head,
+  getHeading,
+  getErrorMessage,
+  addHeading,
+  getContents,
+  fileHandler
+};
