@@ -68,7 +68,7 @@ const classifyInput = function(userInputs) {
   return "validInput";
 };
 
-const head = function(userInputs, fs) {
+const filter = function(userInputs, fs) {
   let returnValue = {
     validInput: getResult,
     illegalOption: getUsage,
@@ -78,7 +78,7 @@ const head = function(userInputs, fs) {
 };
 
 module.exports = {
-  head,
+  filter,
   getHeading,
   getErrorMessage,
   addHeading,

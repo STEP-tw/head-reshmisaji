@@ -1,18 +1,11 @@
-/* 
-  Usage:
-  node ./tail.js file1
-  node ./tail.js -n5 file1
-  node ./tail.js -n 5 file1
-  node ./tail.js -5 file1
-  node ./tail.js file1 file2
-  node ./tail.js -n 5 file1 file2
-  node ./tail.js -n5 file1 file2
-  node ./tail.js -5 file1 file2 
-  node ./tail.js -c5 file1
-  node ./tail.js -c 5 file1
-  node ./tail.js -c5 file1 file2
-  node ./tail.js -c 5 file1 file2
-*/
+const fs = require("fs");
+const { parseInput } = require("./src/inputHandler/handleInput.js");
+const { filter } = require("./src/library/headLibrary.js");
 
+const main = function(args) {
+  let userInputs = parseInput(args.slice(2), "tail");
+  let result = filter(userInputs, fs);
 
-
+  result.map(x => console.log(x));
+};
+main(process.argv);

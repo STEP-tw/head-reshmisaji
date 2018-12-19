@@ -4,7 +4,7 @@ const {
   getErrorMessage,
   addHeading,
   getContents,
-  head,
+  filter,
   getResult,
   getUsage,
   getIllegalCountError,
@@ -208,11 +208,11 @@ describe("classifyInput", function() {
   });
 });
 
-describe("head", function() {
+describe("filter", function() {
   it("should return an error message when given a non existing fileName", function() {
     let userInputs = { option: "n", count: "2", fileNames: ["sample.js"] };
     let expectedOutput = ["head: sample.js: No such file or directory"];
-    let actualOutput = head(userInputs, fsFalse);
+    let actualOutput = filter(userInputs, fsFalse);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
@@ -223,7 +223,7 @@ describe("head", function() {
     let expectedOutput = [
       "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
     ];
-    let actualOutput = head(userInputs, fsTrue);
+    let actualOutput = filter(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
@@ -232,7 +232,7 @@ describe("head", function() {
     let sample = "a\nac\ngg\nvr";
     let userInputs = { option: "n", count: "0", fileNames: ["sample"] };
     let expectedOutput = ["head: illegal line count -- 0"];
-    let actualOutput = head(userInputs, fsTrue);
+    let actualOutput = filter(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
@@ -241,7 +241,7 @@ describe("head", function() {
     let sample = "a\nac\ngg\nvr";
     let userInputs = { option: "n", count: "3", fileNames: [sample] };
     let expectedOutput = ["a\nac\ngg"];
-    let actualOutput = head(userInputs, fsTrue);
+    let actualOutput = filter(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
