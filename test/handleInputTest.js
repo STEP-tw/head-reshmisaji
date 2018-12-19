@@ -11,95 +11,95 @@ const {
 
 describe("parseInput", function() {
   describe("With no options", function() {
-    it('should return an object { option: "n", count: "10", fileNames: ["fileName"] } when we give only one file name', function() {
+    it('should return {option:"n",count:"3",fileNames:["sample.txt"],filter:"head"} when given a file and filter as "head"', function() {
       let userInput = ["sample.txt"];
       let expectedOutput = {
         option: "n",
         count: "10",
         fileNames: ["sample.txt"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
 
-    it('should return an object { option: "n", count: "10", fileNames: ["fileName1","fileName2"] } when given more than one file name', function() {
+    it('should return {option:"n",count:"10",fileNames:["file Name1","fileName2"],filter:"head"} when given more than one file and filter as "head"', function() {
       let userInput = ["sample1.txt", "sample2.txt"];
       let expectedOutput = {
         option: "n",
         count: "10",
         fileNames: ["sample1.txt", "sample2.txt"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
 
   describe("With options", function() {
-    it('should return an object with option:"n",count:"1" and filenames when given option as -n1 ', function() {
+    it('should return an object with option:"n",count:"1",filter:"head" and filenames when given option as -n1 and filter "head"', function() {
       let userInput = ["-n1", "sample.js"];
       let expectedOutput = {
         option: "n",
         count: "1",
         fileNames: ["sample.js"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
 
-    it('should return an object with option:"n",count 1,and fileNames when given the option as "-n 1"', function() {
+    it('should return an object with option:"n",count 1,filter:"head" and fileNames when given the option as "-n 1" and filter "head"', function() {
       let userInput = ["-n", "1", "sample.js"];
       let expectedOutput = {
         option: "n",
         count: "1",
         fileNames: ["sample.js"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
 
-    it('should return an object with option:"n",count:"1" and fileNames, when given option as "-1"', function() {
+    it('should return an object with option:"n",count:"1",filter:"head" and fileNames, when given option as "-1" and filter "head"', function() {
       let userInput = ["-1", "sample.js"];
       let expectedOutput = {
         option: "n",
         count: "1",
         fileNames: ["sample.js"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
 
-    it('should return an object with option:"c",count:"1" and fileNames when given the option as"-c1"', function() {
+    it('should return an object with option:"c",count:"1",filter:"head" and fileNames when given the option as"-c1" and filter "head"', function() {
       let userInput = ["-c1", "sample.js"];
       let expectedOutput = {
         option: "c",
         count: "1",
         fileNames: ["sample.js"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
 
-    it('should return an object with option:"c",count:"1" and fileNames when given the option "-c 1" ', function() {
+    it('should return an object with option:"c",count:"1",filter:"head" and fileNames when given the option "-c 1" and filter "head"', function() {
       let userInput = ["-c", "1", "sample.js"];
       let expectedOutput = {
         option: "c",
         count: "1",
         fileNames: ["sample.js"],
-        filter: undefined
+        filter: "head"
       };
-      let actualOutput = parseInput(userInput);
+      let actualOutput = parseInput(userInput, "head");
 
       assert.deepEqual(actualOutput, expectedOutput);
     });
