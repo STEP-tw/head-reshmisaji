@@ -39,15 +39,29 @@ const isValidOption = function(option) {
 };
 
 const isValidCount = function(count) {
-  return count != -0 && count >= 0;
+  return count != -0 && count > 0;
+};
+
+const getUsage = function(userInputs) {
+  let message = "head: illegal option -- ";
+  message += userInputs.option + "\n";
+  message += "usage: head [-n lines | -c bytes] [file ...]";
+
+  return [message];
+};
+
+const getIllegalCountError = function(userInputs) {
+  let message = "head: illegal line count -- ";
+
+  return [message + userInputs.count];
 };
 
 const classifyInput = function(userInputs) {
+  if (!isValidOption(userInputs.option)) {
+    return "illegalOption";
+  }
   if (!isValidCount(userInputs.count)) {
     return "illegalCount";
-  }
-  if (isValidOption(userInputs.option)) {
-    return "illegalOption";
   }
   return validInput;
 };
