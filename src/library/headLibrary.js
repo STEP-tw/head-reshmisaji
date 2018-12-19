@@ -34,8 +34,30 @@ const fileHandler = function(userInputs, fs) {
   });
 };
 
+const isValidOption = function(option) {
+  return option == "c" || option == "n";
+};
+
+const isValidCount = function(count) {
+  return count != -0 && count >= 0;
+};
+
+const classifyInput = function(userInputs) {
+  if (!isValidCount(userInputs.count)) {
+    return "illegalCount";
+  }
+  if (isValidOption(userInputs.option)) {
+    return "illegalOption";
+  }
+  return validInput;
+};
 const head = function(userInputs, fs) {
-  return fileHandler(userInputs, fs);
+  let returnValue = {
+    validInput: fileHandler,
+    illegalOption: getUsage,
+    illegalCount: getIllegalCountError
+  };
+  return returnValue[classifyInput(userInputs)](userInputs, fs);
 };
 
 module.exports = {
