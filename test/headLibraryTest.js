@@ -71,7 +71,12 @@ describe("addHeading", function() {
 describe("getContents", function() {
   it("should return the contents of the file according to option when given only one file", function() {
     let sampleFile = "a\nb\nc";
-    let userInputs = { option: "n", count: "2", fileNames: [sampleFile] };
+    let userInputs = {
+      option: "n",
+      count: "2",
+      fileNames: [sampleFile],
+      filter: undefined
+    };
     let expectedOutput = "a\nb";
     let actualOutput = getContents(sampleFile, userInputs, fsTrue);
 
@@ -83,7 +88,8 @@ describe("getContents", function() {
     let userInputs = {
       option: "n",
       count: "3",
-      fileNames: ["sampleFile", "example"]
+      fileNames: ["sampleFile", "example"],
+      filter: undefined
     };
     let expectedOutput = "==> sampleFile <==\nsampleFile";
     let actualOutput = getContents(sampleFile, userInputs, fsTrue);
@@ -94,7 +100,12 @@ describe("getContents", function() {
 
 describe("getResult", function() {
   it("should return an error message when given a non existing file", function() {
-    let userInputs = { option: "n", count: "3", fileNames: ["sample.js"] };
+    let userInputs = {
+      option: "n",
+      count: "3",
+      fileNames: ["sample.js"],
+      filter: undefined
+    };
     let expectedOutput = ["head: sample.js: No such file or directory"];
     let actualOutput = getResult(userInputs, fsFalse);
 
@@ -103,7 +114,12 @@ describe("getResult", function() {
 
   it("should return the contents of the file when given an existing file", function() {
     let sample = "1\n2\n3\n4";
-    let userInputs = { option: "n", count: "3", fileNames: [sample] };
+    let userInputs = {
+      option: "n",
+      count: "3",
+      fileNames: [sample],
+      filter: undefined
+    };
     let expectedOutput = ["1\n2\n3"];
     let actualOutput = getResult(userInputs, fsTrue);
 
@@ -112,7 +128,12 @@ describe("getResult", function() {
 
   it('should return the bytes of the file when given the option as "c" ', function() {
     let sample = "ab\ncd\nddf";
-    let userInputs = { option: "c", count: "3", fileNames: [sample] };
+    let userInputs = {
+      option: "c",
+      count: "3",
+      fileNames: [sample],
+      filter: undefined
+    };
     let expectedOutput = ["ab\n"];
     let actualOutput = getResult(userInputs, fsTrue);
 
@@ -122,7 +143,12 @@ describe("getResult", function() {
 
 describe("getUsage", function() {
   it("should return the invalid option error and usage of head", function() {
-    let userInputs = { option: "v", count: "3", fileNames: ["sample.txt"] };
+    let userInputs = {
+      option: "v",
+      count: "3",
+      fileNames: ["sample.txt"],
+      filter: undefined
+    };
     let expectedOutput = [
       "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
     ];
@@ -134,7 +160,12 @@ describe("getUsage", function() {
 
 describe("getIllegalCountError", function() {
   it("should return return the error message with the count", function() {
-    let userInputs = { option: "n", count: "0", fileNames: ["sample.js"] };
+    let userInputs = {
+      option: "n",
+      count: "0",
+      fileNames: ["sample.js"],
+      filter: undefined
+    };
     let expectedOutput = ["head: illegal line count -- 0"];
     let actualOutput = getIllegalCountError(userInputs);
 
@@ -176,7 +207,12 @@ describe("isValidOption", function() {
 
 describe("classifyInput", function() {
   it("should return 'illegalOption' when given '-' as option", function() {
-    let userInputs = { option: "-", count: "3", fileNames: ["sample.txt"] };
+    let userInputs = {
+      option: "-",
+      count: "3",
+      fileNames: ["sample.txt"],
+      filter: undefined
+    };
     let expectedOutput = "illegalOption";
     let actualOutput = classifyInput(userInputs);
 
@@ -184,7 +220,12 @@ describe("classifyInput", function() {
   });
 
   it('should return "illegalOption" when given "v" as option', function() {
-    let userInputs = { option: "v", count: "3", fileNames: ["sample.js"] };
+    let userInputs = {
+      option: "v",
+      count: "3",
+      fileNames: ["sample.js"],
+      filter: undefined
+    };
     let expectedOutput = "illegalOption";
     let actualOutput = classifyInput(userInputs);
 
@@ -192,7 +233,12 @@ describe("classifyInput", function() {
   });
 
   it('should return "illegalCount" when given given "0" as count ', function() {
-    let userInputs = { option: "n", count: "0", fileNames: ["sample.js"] };
+    let userInputs = {
+      option: "n",
+      count: "0",
+      fileNames: ["sample.js"],
+      filter: undefined
+    };
     let expectedOutput = "illegalCount";
     let actualOutput = classifyInput(userInputs);
 
@@ -200,7 +246,12 @@ describe("classifyInput", function() {
   });
 
   it('should return "validInput" when given count:"3" and option:"n"', function() {
-    let userInputs = { option: "n", count: "3", fileNames: ["sample.js"] };
+    let userInputs = {
+      option: "n",
+      count: "3",
+      fileNames: ["sample.js"],
+      filter: undefined
+    };
     let expectedOutput = "validInput";
     let actualOutput = classifyInput(userInputs);
 
@@ -210,7 +261,12 @@ describe("classifyInput", function() {
 
 describe("filter", function() {
   it("should return an error message when given a non existing fileName", function() {
-    let userInputs = { option: "n", count: "2", fileNames: ["sample.js"] };
+    let userInputs = {
+      option: "n",
+      count: "2",
+      fileNames: ["sample.js"],
+      filter: undefined
+    };
     let expectedOutput = ["head: sample.js: No such file or directory"];
     let actualOutput = filter(userInputs, fsFalse);
 
@@ -219,7 +275,12 @@ describe("filter", function() {
 
   it("should return an error message when given option as 'v' ", function() {
     let sample = "ab\nac\ndd\nfg";
-    let userInputs = { option: "v", count: "2", fileNames: ["sample"] };
+    let userInputs = {
+      option: "v",
+      count: "2",
+      fileNames: ["sample"],
+      filter: undefined
+    };
     let expectedOutput = [
       "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
     ];
@@ -230,7 +291,12 @@ describe("filter", function() {
 
   it('should return an error message when given count as "0"', function() {
     let sample = "a\nac\ngg\nvr";
-    let userInputs = { option: "n", count: "0", fileNames: ["sample"] };
+    let userInputs = {
+      option: "n",
+      count: "0",
+      fileNames: ["sample"],
+      filter: undefined
+    };
     let expectedOutput = ["head: illegal line count -- 0"];
     let actualOutput = filter(userInputs, fsTrue);
 
@@ -239,7 +305,12 @@ describe("filter", function() {
 
   it('should return the first 3 lines of the file when option:"n" and count:"3"', function() {
     let sample = "a\nac\ngg\nvr";
-    let userInputs = { option: "n", count: "3", fileNames: [sample] };
+    let userInputs = {
+      option: "n",
+      count: "3",
+      fileNames: [sample],
+      filter: undefined
+    };
     let expectedOutput = ["a\nac\ngg"];
     let actualOutput = filter(userInputs, fsTrue);
 
