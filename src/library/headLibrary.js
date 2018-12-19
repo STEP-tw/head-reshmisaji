@@ -3,8 +3,8 @@ const getHeading = function(file) {
   return "==> " + file + " <==\n";
 };
 
-const getErrorMessage = function(file) {
-  return "head: " + file + ": No such file or directory";
+const getErrorMessage = function(file, userInputs) {
+  return userInputs.filter + ": " + file + ": No such file or directory";
 };
 
 const addHeading = function(fileNames, fileContents, heading) {

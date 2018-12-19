@@ -38,10 +38,29 @@ describe("getHeading", function() {
 });
 
 describe("getErrorMessage", function() {
-  it("should return the error message with the given file name", function() {
+  it("should return the error message with the given file name and filter as head", function() {
+    let userInputs = {
+      option: "n",
+      count: "3",
+      fileNames: ["sample.js"],
+      filter: "head"
+    };
     assert.deepEqual(
-      getErrorMessage("sample.js"),
-      "head: sample.js: No such file or directory"
+      getErrorMessage("sample.js", userInputs),
+      userInputs.filter + ": sample.js: No such file or directory"
+    );
+  });
+
+  it("should return the error message with the given file name and filter as tail", function() {
+    let userInputs = {
+      option: "n",
+      count: "3",
+      fileNames: ["sample.js"],
+      filter: "tail"
+    };
+    assert.deepEqual(
+      getErrorMessage("sample.js", userInputs),
+      userInputs.filter + ": sample.js: No such file or directory"
     );
   });
 });
@@ -131,45 +150,90 @@ describe("getContents", function() {
 });
 
 describe("getResult", function() {
-  it("should return an error message when given a non existing file", function() {
-    let userInputs = {
-      option: "n",
-      count: "3",
-      fileNames: ["sample.js"],
-      filter: "head"
-    };
-    let expectedOutput = ["head: sample.js: No such file or directory"];
-    let actualOutput = getResult(userInputs, fsFalse);
+  describe("Head", function() {
+    it("should return an error message when given a non existing file", function() {
+      let userInputs = {
+        option: "n",
+        count: "3",
+        fileNames: ["sample.js"],
+        filter: "head"
+      };
+      let expectedOutput = ["head: sample.js: No such file or directory"];
+      let actualOutput = getResult(userInputs, fsFalse);
 
-    assert.deepEqual(actualOutput, expectedOutput);
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+
+    it("should return the contents of the file when given an existing file", function() {
+      let sample = "1\n2\n3\n4";
+      let userInputs = {
+        option: "n",
+        count: "3",
+        fileNames: [sample],
+        filter: "head"
+      };
+      let expectedOutput = ["1\n2\n3"];
+      let actualOutput = getResult(userInputs, fsTrue);
+
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+
+    it('should return the bytes of the file when given the option as "c" ', function() {
+      let sample = "ab\ncd\nddf";
+      let userInputs = {
+        option: "c",
+        count: "3",
+        fileNames: [sample],
+        filter: "head"
+      };
+      let expectedOutput = ["ab\n"];
+      let actualOutput = getResult(userInputs, fsTrue);
+
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
   });
 
-  it("should return the contents of the file when given an existing file", function() {
-    let sample = "1\n2\n3\n4";
-    let userInputs = {
-      option: "n",
-      count: "3",
-      fileNames: [sample],
-      filter: "head"
-    };
-    let expectedOutput = ["1\n2\n3"];
-    let actualOutput = getResult(userInputs, fsTrue);
+  describe("Tail", function() {
+    it("should return an error message when given a non existing file", function() {
+      let userInputs = {
+        option: "n",
+        count: "3",
+        fileNames: ["sample.js"],
+        filter: "tail"
+      };
+      let expectedOutput = ["tail: sample.js: No such file or directory"];
+      let actualOutput = getResult(userInputs, fsFalse);
 
-    assert.deepEqual(actualOutput, expectedOutput);
-  });
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
 
-  it('should return the bytes of the file when given the option as "c" ', function() {
-    let sample = "ab\ncd\nddf";
-    let userInputs = {
-      option: "c",
-      count: "3",
-      fileNames: [sample],
-      filter: "head"
-    };
-    let expectedOutput = ["ab\n"];
-    let actualOutput = getResult(userInputs, fsTrue);
+    it("should return the contents of the file when given an existing file", function() {
+      let sample = "1\n2\n3\n4";
+      let userInputs = {
+        option: "n",
+        count: "3",
+        fileNames: [sample],
+        filter: "tail"
+      };
+      let expectedOutput = ["2\n3\n4"];
+      let actualOutput = getResult(userInputs, fsTrue);
 
-    assert.deepEqual(actualOutput, expectedOutput);
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+
+    it('should return the bytes of the file when given the option as "c" ', function() {
+      let sample = "ab\ncd\nddf";
+      let userInputs = {
+        option: "c",
+        count: "3",
+        fileNames: [sample],
+        filter: "tail"
+      };
+      let expectedOutput = ["ddf"];
+      let actualOutput = getResult(userInputs, fsTrue);
+
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
   });
 });
 
