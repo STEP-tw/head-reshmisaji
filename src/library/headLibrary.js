@@ -83,7 +83,7 @@ module.exports = {
   getErrorMessage,
   addHeading,
   getContents,
-  fileHandler: getResult,
+  getResult,
   isValidCount,
   isValidOption,
   getUsage,

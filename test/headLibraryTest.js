@@ -5,7 +5,7 @@ const {
   addHeading,
   getContents,
   head,
-  fileHandler,
+  getResult,
   getUsage,
   getIllegalCountError,
   isValidCount,
@@ -92,11 +92,11 @@ describe("getContents", function() {
   });
 });
 
-describe("fileHandler", function() {
+describe("getResult", function() {
   it("should return an error message when given a non existing file", function() {
     let userInputs = { option: "n", count: "3", fileNames: ["sample.js"] };
     let expectedOutput = ["head: sample.js: No such file or directory"];
-    let actualOutput = fileHandler(userInputs, fsFalse);
+    let actualOutput = getResult(userInputs, fsFalse);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
@@ -105,7 +105,7 @@ describe("fileHandler", function() {
     let sample = "1\n2\n3\n4";
     let userInputs = { option: "n", count: "3", fileNames: [sample] };
     let expectedOutput = ["1\n2\n3"];
-    let actualOutput = fileHandler(userInputs, fsTrue);
+    let actualOutput = getResult(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
@@ -114,7 +114,7 @@ describe("fileHandler", function() {
     let sample = "ab\ncd\nddf";
     let userInputs = { option: "c", count: "3", fileNames: [sample] };
     let expectedOutput = ["ab\n"];
-    let actualOutput = fileHandler(userInputs, fsTrue);
+    let actualOutput = getResult(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
