@@ -16,7 +16,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "n",
         count: "10",
-        fileNames: ["sample.txt"]
+        fileNames: ["sample.txt"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 
@@ -28,7 +29,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "n",
         count: "10",
-        fileNames: ["sample1.txt", "sample2.txt"]
+        fileNames: ["sample1.txt", "sample2.txt"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 
@@ -42,7 +44,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "n",
         count: "1",
-        fileNames: ["sample.js"]
+        fileNames: ["sample.js"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 
@@ -54,7 +57,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "n",
         count: "1",
-        fileNames: ["sample.js"]
+        fileNames: ["sample.js"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 
@@ -66,7 +70,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "n",
         count: "1",
-        fileNames: ["sample.js"]
+        fileNames: ["sample.js"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 
@@ -78,7 +83,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "c",
         count: "1",
-        fileNames: ["sample.js"]
+        fileNames: ["sample.js"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 
@@ -90,7 +96,8 @@ describe("parseInput", function() {
       let expectedOutput = {
         option: "c",
         count: "1",
-        fileNames: ["sample.js"]
+        fileNames: ["sample.js"],
+        filter: undefined
       };
       let actualOutput = parseInput(userInput);
 

@@ -40,8 +40,13 @@ const getFileNames = function(userInputs) {
   return userInputs.slice(1);
 };
 
-const parseInput = function(userInputs) {
-  let parsedInput = { option: "n", count: "10", fileNames: userInputs };
+const parseInput = function(userInputs, filter) {
+  let parsedInput = {
+    option: "n",
+    count: "10",
+    fileNames: userInputs,
+    filter: filter
+  };
 
   if (hasOption(userInputs)) {
     parsedInput.option = getOption(userInputs[0]);
