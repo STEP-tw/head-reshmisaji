@@ -52,8 +52,10 @@ const getUsage = function(userInputs) {
 
 const getIllegalCountError = function(userInputs) {
   let message = {
-    n: (lineCountError = "head: illegal line count -- " + userInputs.count),
-    c: (byteCountError = "head: illegal byte count -- " + userInputs.count)
+    n: (lineCountError =
+      userInputs.filter + ": illegal line count -- " + userInputs.count),
+    c: (byteCountError =
+      userInputs.filter + ": illegal byte count -- " + userInputs.count)
   };
   return [message[userInputs.option]];
 };

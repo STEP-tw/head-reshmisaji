@@ -164,7 +164,7 @@ describe("getIllegalCountError", function() {
       option: "n",
       count: "0",
       fileNames: ["sample.js"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["head: illegal line count -- 0"];
     let actualOutput = getIllegalCountError(userInputs);
@@ -265,7 +265,7 @@ describe("filter", function() {
       option: "n",
       count: "2",
       fileNames: ["sample.js"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["head: sample.js: No such file or directory"];
     let actualOutput = filter(userInputs, fsFalse);
@@ -279,7 +279,7 @@ describe("filter", function() {
       option: "v",
       count: "2",
       fileNames: ["sample"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = [
       "head: illegal option -- v\nusage: head [-n lines | -c bytes] [file ...]"
@@ -295,7 +295,7 @@ describe("filter", function() {
       option: "n",
       count: "0",
       fileNames: ["sample"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["head: illegal line count -- 0"];
     let actualOutput = filter(userInputs, fsTrue);
@@ -309,7 +309,7 @@ describe("filter", function() {
       option: "n",
       count: "3",
       fileNames: [sample],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["a\nac\ngg"];
     let actualOutput = filter(userInputs, fsTrue);
