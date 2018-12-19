@@ -69,32 +69,64 @@ describe("addHeading", function() {
 });
 
 describe("getContents", function() {
-  it("should return the contents of the file according to option when given only one file", function() {
-    let sampleFile = "a\nb\nc";
-    let userInputs = {
-      option: "n",
-      count: "2",
-      fileNames: [sampleFile],
-      filter: "head"
-    };
-    let expectedOutput = "a\nb";
-    let actualOutput = getContents(sampleFile, userInputs, fsTrue);
+  describe("Head", function() {
+    it("should return the contents of the file according to option when given only one file", function() {
+      let sampleFile = "a\nb\nc";
+      let userInputs = {
+        option: "n",
+        count: "2",
+        fileNames: [sampleFile],
+        filter: "head"
+      };
+      let expectedOutput = "a\nb";
+      let actualOutput = getContents(sampleFile, userInputs, fsTrue);
 
-    assert.deepEqual(actualOutput, expectedOutput);
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+
+    it("should return the contents of the file with heading when we give more than one file", function() {
+      let sampleFile = "sampleFile";
+      let userInputs = {
+        option: "n",
+        count: "3",
+        fileNames: ["sampleFile", "example"],
+        filter: "head"
+      };
+      let expectedOutput = "==> sampleFile <==\nsampleFile";
+      let actualOutput = getContents(sampleFile, userInputs, fsTrue);
+
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
   });
 
-  it("should return the contents of the file with heading when we give more than one file", function() {
-    let sampleFile = "sampleFile";
-    let userInputs = {
-      option: "n",
-      count: "3",
-      fileNames: ["sampleFile", "example"],
-      filter: "head"
-    };
-    let expectedOutput = "==> sampleFile <==\nsampleFile";
-    let actualOutput = getContents(sampleFile, userInputs, fsTrue);
+  describe("Tail", function() {
+    it("should return the contents of the file according to option when given only one file", function() {
+      let sampleFile = "a\nb\nc";
+      let userInputs = {
+        option: "n",
+        count: "2",
+        fileNames: [sampleFile],
+        filter: "tail"
+      };
+      let expectedOutput = "b\nc";
+      let actualOutput = getContents(sampleFile, userInputs, fsTrue);
 
-    assert.deepEqual(actualOutput, expectedOutput);
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+
+    it("should return the contents of the file with heading when we give more than one file", function() {
+      let sampleFile = "sampleFile";
+      let userInputs = {
+        option: "n",
+        count: "3",
+        fileNames: ["sampleFile", "example"],
+        filter: "tail"
+      };
+      let expectedOutput = "==> sampleFile <==\nsampleFile";
+      let actualOutput = getContents(sampleFile, userInputs, fsTrue);
+
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
   });
 });
 
