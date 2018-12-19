@@ -25,7 +25,7 @@ const getContents = function(file, userInputs, fs) {
   return addHeading(userInputs.fileNames, fileContents, heading);
 };
 
-const fileHandler = function(userInputs, fs) {
+const getResult = function(userInputs, fs) {
   return userInputs.fileNames.map(function(file) {
     let result = { true: getContents, false: getErrorMessage };
     let fileStatus = fs.existsSync(file);
@@ -70,7 +70,7 @@ const classifyInput = function(userInputs) {
 
 const head = function(userInputs, fs) {
   let returnValue = {
-    validInput: fileHandler,
+    validInput: getResult,
     illegalOption: getUsage,
     illegalCount: getIllegalCountError
   };
@@ -83,7 +83,7 @@ module.exports = {
   getErrorMessage,
   addHeading,
   getContents,
-  fileHandler,
+  fileHandler: getResult,
   isValidCount,
   isValidOption,
   getUsage,
