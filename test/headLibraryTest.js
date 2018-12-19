@@ -75,7 +75,7 @@ describe("getContents", function() {
       option: "n",
       count: "2",
       fileNames: [sampleFile],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = "a\nb";
     let actualOutput = getContents(sampleFile, userInputs, fsTrue);
@@ -89,7 +89,7 @@ describe("getContents", function() {
       option: "n",
       count: "3",
       fileNames: ["sampleFile", "example"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = "==> sampleFile <==\nsampleFile";
     let actualOutput = getContents(sampleFile, userInputs, fsTrue);
@@ -104,7 +104,7 @@ describe("getResult", function() {
       option: "n",
       count: "3",
       fileNames: ["sample.js"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["head: sample.js: No such file or directory"];
     let actualOutput = getResult(userInputs, fsFalse);
@@ -118,7 +118,7 @@ describe("getResult", function() {
       option: "n",
       count: "3",
       fileNames: [sample],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["1\n2\n3"];
     let actualOutput = getResult(userInputs, fsTrue);
@@ -132,7 +132,7 @@ describe("getResult", function() {
       option: "c",
       count: "3",
       fileNames: [sample],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = ["ab\n"];
     let actualOutput = getResult(userInputs, fsTrue);

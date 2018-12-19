@@ -18,11 +18,28 @@ const getContents = function(file, userInputs, fs) {
   let filterOptions = { c: getFirstCharacters, n: getTopLines };
   let heading = getHeading(file);
   let contents = fs.readFileSync(file, "utf8");
-  let fileContents = filterOptions[userInputs.option](
-    contents,
-    userInputs.count
+  let filteredContents = {
+    head: (fileContents = filterOptions[userInputs.option](
+      contents,
+      userInputs.count
+    )),
+    tail: (fileContents = filterOptions[userInputs.option](
+      contents
+        .split("\n")
+        .reverse()
+        .join("\n"),
+      userInputs.count
+    )
+      .split("\n")
+      .reverse()
+      .join("\n"))
+  };
+
+  return addHeading(
+    userInputs.fileNames,
+    filteredContents[userInputs.filter],
+    heading
   );
-  return addHeading(userInputs.fileNames, fileContents, heading);
 };
 
 const getResult = function(userInputs, fs) {
