@@ -270,7 +270,7 @@ describe("getUsage", function() {
 });
 
 describe("getIllegalCountError", function() {
-  it("should return return the error message with the count", function() {
+  it("should return return the error message with the count with filter head", function() {
     let userInputs = {
       option: "n",
       count: "0",
@@ -278,6 +278,19 @@ describe("getIllegalCountError", function() {
       filter: "head"
     };
     let expectedOutput = ["head: illegal line count -- 0"];
+    let actualOutput = getIllegalCountError(userInputs);
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return return the error message with the count with filter tail", function() {
+    let userInputs = {
+      option: "n",
+      count: "0",
+      fileNames: ["sample.js"],
+      filter: "tail"
+    };
+    let expectedOutput = ["tail: illegal line count -- 0"];
     let actualOutput = getIllegalCountError(userInputs);
 
     assert.deepEqual(actualOutput, expectedOutput);
