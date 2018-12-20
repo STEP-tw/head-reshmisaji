@@ -7,7 +7,7 @@ const {
   hasOnlyOption,
   getLineCount,
   getFileNames
-} = require("../src/inputHandler/handleInput.js");
+} = require("../src/handleInput.js");
 
 describe("parseInput", function() {
   describe("Head", function() {

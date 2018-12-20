@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { getTopLines, getFirstCharacters } = require("../src/util/utils.js");
+const { getTopLines, getFirstCharacters } = require("../src/utils.js");
 
 describe("getTopLines", function() {
   it("should return an empty array when the number of lines is 0", function() {

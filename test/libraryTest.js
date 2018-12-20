@@ -12,7 +12,7 @@ const {
   isValidOption,
   classifyInput,
   isGreaterThanOne
-} = require("../src/library/headLibrary.js");
+} = require("../src/library.js");
 
 const fsTrue = {
   readFileSync: function(x) {

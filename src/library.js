@@ -1,4 +1,4 @@
-const { getTopLines, getFirstCharacters } = require("../util/utils.js");
+const { getTopLines, getFirstCharacters } = require("./utils.js");
 
 const getHeading = function(file) {
   return "==> " + file + " <==\n";
