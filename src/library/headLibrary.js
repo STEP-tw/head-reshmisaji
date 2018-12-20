@@ -1,4 +1,5 @@
 const { getTopLines, getFirstCharacters } = require("../util/utils.js");
+
 const getHeading = function(file) {
   return "==> " + file + " <==\n";
 };
@@ -7,10 +8,14 @@ const getErrorMessage = function(file, userInputs) {
   return userInputs.filter + ": " + file + ": No such file or directory";
 };
 
+const isGreaterThanOne = function(length) {
+  return length > 1;
+};
+
 const addHeading = function(fileNames, fileContents, heading) {
   let returnValue = { true: heading + fileContents, false: fileContents };
 
-  return returnValue[fileNames.length > 1];
+  return returnValue[isGreaterThanOne(fileNames.length)];
 };
 
 const getContents = function(file, userInputs, fs) {
@@ -51,8 +56,9 @@ const getResult = function(userInputs, fs) {
   return userInputs.fileNames.map(function(file) {
     let result = { true: getContents, false: getErrorMessage };
     let fileStatus = fs.existsSync(file);
+    let returnValue = result[fileStatus](file, userInputs, fs);
 
-    return result[fileStatus](file, userInputs, fs);
+    return returnValue;
   });
 };
 
@@ -116,5 +122,6 @@ module.exports = {
   isValidOption,
   getUsage,
   getIllegalCountError,
-  classifyInput
+  classifyInput,
+  isGreaterThanOne
 };

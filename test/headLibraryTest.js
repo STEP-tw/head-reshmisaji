@@ -10,7 +10,8 @@ const {
   getIllegalCountError,
   isValidCount,
   isValidOption,
-  classifyInput
+  classifyInput,
+  isGreaterThanOne
 } = require("../src/library/headLibrary.js");
 
 const fsTrue = {
@@ -439,5 +440,23 @@ describe("filter", function() {
     let actualOutput = filter(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
+
+describe("isGreaterThanOne", function() {
+  it("should return false when given 0", function() {
+    assert.deepEqual(isGreaterThanOne(0), false);
+  });
+
+  it("should return false when given 1", function() {
+    assert.deepEqual(isGreaterThanOne(1), false);
+  });
+
+  it("should return false when given -1", function() {
+    assert.deepEqual(isGreaterThanOne(-1), false);
+  });
+
+  it("should return true when given 2", function() {
+    assert.deepEqual(isGreaterThanOne(2), true);
   });
 });
