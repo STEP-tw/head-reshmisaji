@@ -8,10 +8,9 @@ const getErrorMessage = function(file, userInputs) {
 };
 
 const addHeading = function(fileNames, fileContents, heading) {
-  if (fileNames.length > 1) {
-    fileContents = heading + fileContents;
-  }
-  return fileContents;
+  let returnValue = { true: heading + fileContents, false: fileContents };
+
+  return returnValue[fileNames.length > 1];
 };
 
 const getContents = function(file, userInputs, fs) {
