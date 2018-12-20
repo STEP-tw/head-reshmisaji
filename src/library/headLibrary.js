@@ -19,25 +19,31 @@ const getContents = function(file, userInputs, fs) {
   let heading = getHeading(file);
   let contents = fs.readFileSync(file, "utf8");
   let filteredContents = {
-    head: (fileContents = filterOptions[userInputs.option](
-      contents,
-      userInputs.count
-    )),
-    tail: (fileContents = filterOptions[userInputs.option](
-      contents
+    head: function(contents, count) {
+      return filterOptions[userInputs.option](contents, userInputs.count);
+    },
+    tail: function(contents, count) {
+      let data = contents
         .split("\n")
         .reverse()
-        .join("\n"),
-      userInputs.count
-    )
-      .split("\n")
-      .reverse()
-      .join("\n"))
+        .join("\n");
+      data = filterOptions[userInputs.option](
+        contents
+          .split("\n")
+          .reverse()
+          .join("\n"),
+        userInputs.count
+      );
+      return data
+        .split("\n")
+        .reverse()
+        .join("\n");
+    }
   };
 
   return addHeading(
     userInputs.fileNames,
-    filteredContents[userInputs.filter],
+    filteredContents[userInputs.filter](contents, userInputs.count),
     heading
   );
 };
