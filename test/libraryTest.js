@@ -299,16 +299,30 @@ describe("getIllegalCountError", function() {
 });
 
 describe("isValidCount", function() {
-  it('should return false when given given "-" ', function() {
-    assert.deepEqual(isValidCount("-"), false);
+  it('should return false when given given "-" and filter as head', function() {
+    let userInputs = { count: "-", filter: "head" };
+    assert.deepEqual(isValidCount(userInputs), false);
   });
 
-  it("should return true when given 0", function() {
-    assert.deepEqual(isValidCount(0), true);
+  it('should return false when given given "-" and filter as tail', function() {
+    let userInputs = { count: "-", filter: "tail" };
+    assert.deepEqual(isValidCount(userInputs), true);
   });
 
-  it("should return true when given 3", function() {
-    assert.deepEqual(isValidCount(3), true);
+  it("should return true when given 0 tail as filter", function() {
+    assert.deepEqual(isValidCount({ count: 0, filter: "tail" }), true);
+  });
+
+  it("should return false when given 0 head as filter", function() {
+    assert.deepEqual(isValidCount({ count: 0, filter: "head" }), false);
+  });
+
+  it("should return true when given 3 and filter as head", function() {
+    assert.deepEqual(isValidCount({ count: "3", filter: "head" }), true);
+  });
+
+  it("should return true when given 3 and filter as tail", function() {
+    assert.deepEqual(isValidCount({ count: "3", filter: "tail" }), true);
   });
 });
 
@@ -331,12 +345,12 @@ describe("isValidOption", function() {
 });
 
 describe("classifyInput", function() {
-  it("should return 'illegalOption' when given '-' as option", function() {
+  it("should return 'illegalOption' when given '-' as option for head", function() {
     let userInputs = {
       option: "-",
       count: "3",
       fileNames: ["sample.txt"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = "illegalOption";
     let actualOutput = classifyInput(userInputs);
@@ -357,12 +371,12 @@ describe("classifyInput", function() {
     assert.deepEqual(actualOutput, expectedOutput);
   });
 
-  it('should return "illegalCount" when given given "0" as count ', function() {
+  it('should return "validInput" when given given "0" as count for tail', function() {
     let userInputs = {
       option: "n",
       count: "0",
       fileNames: ["sample.js"],
-      filter: undefined
+      filter: "tail"
     };
     let expectedOutput = "validInput";
     let actualOutput = classifyInput(userInputs);
@@ -375,7 +389,7 @@ describe("classifyInput", function() {
       option: "n",
       count: "3",
       fileNames: ["sample.js"],
-      filter: undefined
+      filter: "head"
     };
     let expectedOutput = "validInput";
     let actualOutput = classifyInput(userInputs);
@@ -422,7 +436,7 @@ describe("filter", function() {
       fileNames: ["sample"],
       filter: "head"
     };
-    let expectedOutput = [""];
+    let expectedOutput = ["head: illegal line count -- 0"];
     let actualOutput = filter(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);

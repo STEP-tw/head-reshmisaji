@@ -70,8 +70,14 @@ const isValidOption = function(option) {
   return option == "c" || option == "n";
 };
 
-const isValidCount = function(count) {
-  return count >= 0;
+const isValidCount = function(userInputs) {
+  let count = userInputs.count;
+  let validCount = {
+    head: count > 0,
+    tail: typeof Math.abs(count) == "number"
+  };
+
+  return validCount[userInputs.filter];
 };
 
 const getUsage = function(userInputs) {
@@ -100,7 +106,7 @@ const classifyInput = function(userInputs) {
   if (!isValidOption(userInputs.option)) {
     return "illegalOption";
   }
-  if (!isValidCount(userInputs.count)) {
+  if (!isValidCount(userInputs)) {
     return "illegalCount";
   }
   return "validInput";
