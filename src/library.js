@@ -53,13 +53,17 @@ const getContents = function(file, userInputs, fs) {
 };
 
 const getResult = function(userInputs, fs) {
-  return userInputs.fileNames.map(function(file) {
-    let result = { true: getContents, false: getErrorMessage };
-    let fileStatus = fs.existsSync(file);
-    let returnValue = result[fileStatus](file, userInputs, fs);
+  return [
+    userInputs.fileNames
+      .map(function(file) {
+        let result = { true: getContents, false: getErrorMessage };
+        let fileStatus = fs.existsSync(file);
+        let returnValue = result[fileStatus](file, userInputs, fs);
 
-    return returnValue;
-  });
+        return returnValue;
+      })
+      .join("\n\n")
+  ];
 };
 
 const isValidOption = function(option) {
