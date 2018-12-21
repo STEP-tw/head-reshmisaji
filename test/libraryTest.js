@@ -303,8 +303,8 @@ describe("isValidCount", function() {
     assert.deepEqual(isValidCount("-"), false);
   });
 
-  it("should return false when given 0", function() {
-    assert.deepEqual(isValidCount(0), false);
+  it("should return true when given 0", function() {
+    assert.deepEqual(isValidCount(0), true);
   });
 
   it("should return true when given 3", function() {
@@ -364,7 +364,7 @@ describe("classifyInput", function() {
       fileNames: ["sample.js"],
       filter: undefined
     };
-    let expectedOutput = "illegalCount";
+    let expectedOutput = "validInput";
     let actualOutput = classifyInput(userInputs);
 
     assert.deepEqual(actualOutput, expectedOutput);
@@ -422,7 +422,7 @@ describe("filter", function() {
       fileNames: ["sample"],
       filter: "head"
     };
-    let expectedOutput = ["head: illegal line count -- 0"];
+    let expectedOutput = [""];
     let actualOutput = filter(userInputs, fsTrue);
 
     assert.deepEqual(actualOutput, expectedOutput);

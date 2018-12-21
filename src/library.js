@@ -24,7 +24,7 @@ const getContents = function(file, userInputs, fs) {
   let contents = fs.readFileSync(file, "utf8");
   let filteredContents = {
     head: function(contents, count) {
-      return filterOptions[userInputs.option](contents, userInputs.count);
+      return filterOptions[userInputs.option](contents, count);
     },
     tail: function(contents, count) {
       let data = contents
@@ -36,7 +36,7 @@ const getContents = function(file, userInputs, fs) {
           .split("\n")
           .reverse()
           .join("\n"),
-        userInputs.count
+        count
       );
       return data
         .split("\n")
@@ -71,7 +71,7 @@ const isValidOption = function(option) {
 };
 
 const isValidCount = function(count) {
-  return count != -0 && count > 0;
+  return count >= 0;
 };
 
 const getUsage = function(userInputs) {
