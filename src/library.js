@@ -1,4 +1,9 @@
-const { getTopLines, getFirstCharacters } = require("./utils.js");
+const {
+  getTopLines,
+  getFirstCharacters,
+  getBotttomCharacters,
+  getBottomLines
+} = require("./utils.js");
 
 const getHeading = function(file) {
   return "==> " + file + " <==\n";
@@ -19,37 +24,20 @@ const addHeading = function(fileNames, fileContents, heading) {
 };
 
 const getContents = function(file, userInputs, fs) {
-  let filterOptions = { c: getFirstCharacters, n: getTopLines };
+  let headFilter = { c: getFirstCharacters, n: getTopLines };
+  let tailFilter = { c: getBotttomCharacters, n: getBottomLines };
   let heading = getHeading(file);
   let contents = fs.readFileSync(file, "utf8");
   let filteredContents = {
     head: function(contents, count) {
-      return filterOptions[userInputs.option](contents, count);
+      return headFilter[userInputs.option](contents, count);
     },
     tail: function(contents, count) {
-      let data = contents
-        .split("\n")
-        .reverse()
-        .join("\n");
-      data = filterOptions[userInputs.option](
-        contents
-          .split("\n")
-          .reverse()
-          .join("\n"),
-        count
-      );
-      return data
-        .split("\n")
-        .reverse()
-        .join("\n");
+      return tailFilter[userInputs.option](contents, count);
     }
   };
-
-  return addHeading(
-    userInputs.fileNames,
-    filteredContents[userInputs.filter](contents, userInputs.count),
-    heading
-  );
+  contents = filteredContents[userInputs.filter](contents, userInputs.count);
+  return addHeading(userInputs.fileNames, contents, heading);
 };
 
 const getResult = function(userInputs, fs) {
