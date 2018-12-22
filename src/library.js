@@ -61,6 +61,7 @@ const isValidOption = function(option) {
 
 const isValidCount = function(userInputs) {
   let count = userInputs.count;
+
   let validCount = {
     head: count > 0,
     tail: typeof Math.abs(count) == "number"

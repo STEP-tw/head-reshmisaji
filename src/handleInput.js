@@ -29,7 +29,9 @@ const getLineCount = function(userInputs) {
   if (isLengthTwo(option)) {
     return option.slice(1);
   }
-
+  if (!isNaN(option.slice(1, 2))) {
+    return option.slice(1);
+  }
   return option.slice(2);
 };
 
