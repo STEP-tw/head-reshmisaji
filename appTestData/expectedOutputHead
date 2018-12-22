@@ -8,3 +8,68 @@ Seven
 Eight
 Nine
 Ten
+==> ./testData/sampleText <==
+One
+Two
+Three
+Four
+Five
+Six
+Seven
+Eight
+Nine
+Ten
+
+==> ./testData/sampleNumbers <==
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+==> ./testData/sampleText <==
+One
+Two
+Three
+Four
+Five
+Six
+Seven
+Eight
+Nine
+Ten
+
+head: ./sampleNumbers: No such file or directory
+
+==> ./testData/sampleNumbers <==
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+head: ./sampleNumbers: No such file or directory
+head: ./sampleNumbers: No such file or directory
+
+head: ./sampleText: No such file or directory
+head: ./sampleNumbers: No such file or directory
+
+==> ./testData/sampleNumbers <==
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9

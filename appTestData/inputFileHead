@@ -1,1 +1,6 @@
 ./testData/sampleText
+./testData/sampleText|./testData/sampleNumbers
+./testData/sampleText|./sampleNumbers|./testData/sampleNumbers
+./sampleNumbers
+./sampleNumbers|./sampleText
+./sampleNumbers|./testData/sampleNumbers

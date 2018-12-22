@@ -1,5 +1,5 @@
 #! /bin/bash
-
+set -e
 if [ $# -eq 0 ]; then
   echo "Usage:"
   echo "run_test.sh <name_of_script.js> [input_file] [expected_output]"
