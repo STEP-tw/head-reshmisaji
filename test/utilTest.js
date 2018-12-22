@@ -2,7 +2,8 @@ const assert = require("assert");
 const {
   getTopLines,
   getFirstCharacters,
-  getBotttomCharacters
+  getBotttomCharacters,
+  getBottomLines
 } = require("../src/utils.js");
 
 describe("getTopLines", function() {
@@ -59,5 +60,30 @@ describe("getBottomCharacters", function() {
     let expectedOutput = "\nas";
 
     assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return empty string when given count as 0", function() {
+    let contents = "ab\ncd \n123\nas";
+    let numberOfCharacters = "0";
+    let actualOutput = getBotttomCharacters(contents, numberOfCharacters);
+    let expectedOutput = "";
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
+
+describe("getBottomLines", function() {
+  it("should return 1 line from the bottom when given count as 1", function() {
+    let contents = "1\n2\n3\n4\n5\n6\n7\n8";
+    let actualOutput = getBottomLines(contents, 1);
+
+    assert.deepEqual(actualOutput, "8");
+  });
+
+  it("should return empty when given count as 0", function() {
+    let contents = "1\n2\n3\n4\n5\n6\n7\n8";
+    let actualOutput = getBottomLines(contents, 0);
+
+    assert.deepEqual(actualOutput, "");
   });
 });
