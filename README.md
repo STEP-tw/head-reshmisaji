@@ -14,7 +14,7 @@
   node ./head.js -c5 file1 file2
   node ./head.js -c 5 file1 file2
   ```
-  ===
+---
 ## Tail-Usage:
 ---
   ```node ./tail.js file1
