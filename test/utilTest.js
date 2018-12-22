@@ -70,6 +70,24 @@ describe("getBottomCharacters", function() {
 
     assert.deepEqual(actualOutput, expectedOutput);
   });
+
+  it("should return whole content when given count greater than the length of the contents", function() {
+    let contents = "ab\ncd \n123\nas";
+    let numberOfCharacters = "22";
+    let actualOutput = getBotttomCharacters(contents, numberOfCharacters);
+    let expectedOutput = "ab\ncd \n123\nas";
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+
+  it("should return bottom 3 characters of the content when given count -3", function() {
+    let contents = "ab\ncd \n123\nas";
+    let numberOfCharacters = "-3";
+    let actualOutput = getBotttomCharacters(contents, numberOfCharacters);
+    let expectedOutput = "\nas";
+
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
 });
 
 describe("getBottomLines", function() {

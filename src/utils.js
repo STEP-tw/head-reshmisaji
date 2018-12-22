@@ -5,13 +5,15 @@ const getTopLines = function(contents, numberOfLines) {
 
 const getBotttomCharacters = function(contents, numberOfCharacters) {
   let data = contents.split("");
-  return data.slice(data.length - Math.max(numberOfCharacters, 0)).join("");
+  return data
+    .slice(data.length - Math.min(Math.abs(numberOfCharacters), data.length))
+    .join("");
 };
 
 const getBottomLines = function(contents, numberOfLines) {
   let data = contents.split("\n");
 
-  return data.slice(data.length - Math.max(numberOfLines, 0)).join("\n");
+  return data.slice(data.length - Math.abs(numberOfLines)).join("\n");
 };
 
 const getFirstCharacters = function(contents, numberOfCharacters) {
