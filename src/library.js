@@ -24,10 +24,10 @@ const addHeading = function(fileNames, fileContents, heading) {
 };
 
 const getContents = function(file, userInputs, fs) {
-  let headFilter = { c: getFirstCharacters, n: getTopLines };
-  let tailFilter = { c: getBotttomCharacters, n: getBottomLines };
   let heading = getHeading(file);
   let contents = fs.readFileSync(file, "utf8");
+  let headFilter = { c: getFirstCharacters, n: getTopLines };
+  let tailFilter = { c: getBotttomCharacters, n: getBottomLines };
   let filteredContents = {
     head: function(contents, count) {
       return headFilter[userInputs.option](contents, count);
@@ -37,6 +37,7 @@ const getContents = function(file, userInputs, fs) {
     }
   };
   contents = filteredContents[userInputs.filter](contents, userInputs.count);
+
   return addHeading(userInputs.fileNames, contents, heading);
 };
 
