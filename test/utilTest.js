@@ -1,5 +1,9 @@
 const assert = require("assert");
-const { getTopLines, getFirstCharacters } = require("../src/utils.js");
+const {
+  getTopLines,
+  getFirstCharacters,
+  getBotttomCharacters
+} = require("../src/utils.js");
 
 describe("getTopLines", function() {
   it("should return an empty array when the number of lines is 0", function() {
@@ -44,5 +48,16 @@ describe("getFirstCharacters", function() {
   it("should return a string with 2 elements when the number of characters is 3 and the conten has a length of 2 only", function() {
     let contents = "ab";
     assert.deepEqual(getFirstCharacters(contents, 3), "ab");
+  });
+});
+
+describe("getBottomCharacters", function() {
+  it("should return the 3 bottom characters when given count as 3", function() {
+    let contents = "ab\ncd \n123\nas";
+    let numberOfCharacters = "3";
+    let actualOutput = getBotttomCharacters(contents, numberOfCharacters);
+    let expectedOutput = "\nas";
+
+    assert.deepEqual(actualOutput, expectedOutput);
   });
 });
