@@ -63,7 +63,7 @@ const isValidCount = function(userInputs) {
   let count = userInputs.count;
 
   let validCount = {
-    head: count > 0,
+    head: count > 0 && typeof Math.abs(count) == "number",
     tail: typeof Math.abs(count) == "number"
   };
 
