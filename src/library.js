@@ -64,7 +64,7 @@ const isValidCount = function(userInputs) {
 
   let validCount = {
     head: count > 0 && typeof Math.abs(count) == "number",
-    tail: typeof Math.abs(count) == "number"
+    tail: !isNaN(Math.abs(count)) && count >= 0
   };
 
   return validCount[userInputs.filter];

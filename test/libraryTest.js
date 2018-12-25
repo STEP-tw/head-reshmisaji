@@ -306,7 +306,7 @@ describe("isValidCount", function() {
 
   it('should return false when given given "-" and filter as tail', function() {
     let userInputs = { count: "-", filter: "tail" };
-    assert.deepEqual(isValidCount(userInputs), true);
+    assert.deepEqual(isValidCount(userInputs), false);
   });
 
   it("should return true when given 0 tail as filter", function() {
