@@ -291,7 +291,7 @@ describe("getIllegalCountError", function() {
       fileNames: ["sample.js"],
       filter: "tail"
     };
-    let expectedOutput = ["tail: illegal line count -- 0"];
+    let expectedOutput = ["tail: illegal offset -- 0"];
     let actualOutput = getIllegalCountError(userInputs);
 
     assert.deepEqual(actualOutput, expectedOutput);

@@ -84,12 +84,16 @@ const getUsage = function(userInputs) {
 
 const getIllegalCountError = function(userInputs) {
   let message = {
-    n: (lineCountError =
-      userInputs.filter + ": illegal line count -- " + userInputs.count),
-    c: (byteCountError =
-      userInputs.filter + ": illegal byte count -- " + userInputs.count)
+    head: {
+      n: (lineCountError = "head: illegal line count -- " + userInputs.count),
+      c: (byteCountError = "head: illegal byte count -- " + userInputs.count)
+    },
+    tail: {
+      n: "tail: illegal offset -- " + userInputs.count,
+      c: "tail: illegal offset -- " + userInputs.count
+    }
   };
-  return [message[userInputs.option]];
+  return [message[userInputs.filter][userInputs.option]];
 };
 
 const classifyInput = function(userInputs) {
