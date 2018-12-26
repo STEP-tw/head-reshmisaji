@@ -11,7 +11,7 @@ const getBotttomCharacters = function(contents, numberOfCharacters) {
 };
 
 const getBottomLines = function(contents, numberOfLines) {
-  let data = contents.split("\n");
+  let data = contents.trim().split("\n");
 
   return data.slice(data.length - Math.abs(numberOfLines)).join("\n");
 };
