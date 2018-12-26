@@ -73,3 +73,33 @@ head: ./sampleNumbers: No such file or directory
 7
 8
 9
+==> ./testData/sampleNumbers <==
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+head: ./sampleNumbers: No such file or directory
+0
+==> ./testData/sampleNumbers <==
+0
+
+==> ./testData/sampleText <==
+One
+==> ./testData/sampleNumbers <==
+0
+
+head: ./sampleNumbers: No such file or directory
+==> ./testData/sampleNumbers <==
+0
+
+head: ./sampleNumbers: No such file or directory
+
+==> ./testData/sampleText <==
+One

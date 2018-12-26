@@ -4,3 +4,8 @@
 ./sampleNumbers
 ./sampleNumbers|./sampleText
 ./sampleNumbers|./testData/sampleNumbers
+./testData/sampleNumbers|./sampleNumbers
+-1|./testData/sampleNumbers
+-1|./testData/sampleNumbers|./testData/sampleText
+-1|./testData/sampleNumbers|./sampleNumbers
+-1|./testData/sampleNumbers|./sampleNumbers|./testData/sampleText
